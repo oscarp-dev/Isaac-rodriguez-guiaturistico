@@ -51,29 +51,40 @@ body {
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
 
-  /* ── Stop cards: estado "activado" por defecto en táctil ── */
-  .stop-card img {
-    filter: brightness(.58) saturate(.95);
+  /* Hero: castillo más a la derecha en móvil */
+  .hero-bg {
+    background-position: center center, center center, 68% center;
   }
-  /* Evita el expand al tocar */
+
+  /* ── Stop cards: sin transiciones al tocar ── */
+  .stop-card,
+  .stop-card img,
+  .stop-card .stop-tag,
+  .stop-card .stop-desc,
+  .stop-card .stop-icon-row,
+  .stop-card .stop-name {
+    transition: none !important;
+  }
+  /* Imagen iluminada por defecto */
+  .stop-card img { filter: brightness(.58) saturate(.95); }
+  /* Evita expand al tocar */
   .stop-card:hover { flex: 1 !important; }
   .stop-card:hover img {
     filter: brightness(.58) saturate(.95) !important;
     transform: none !important;
   }
-  /* Nombre siempre horizontal */
+  /* Nombre siempre horizontal, contenido siempre visible */
   .stop-card .stop-name { writing-mode: horizontal-tb; }
-  /* Contenido siempre visible */
   .stop-card .stop-tag,
   .stop-card .stop-desc,
-  .stop-card .stop-icon-row {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* Círculo del route-timeline: sin hover scale */
+  .stop-card .stop-icon-row { opacity: 1; transform: translateY(0); }
+
+  /* Sin efectos al tocar en el resto de elementos interactivos */
   .route-stop:hover .route-circle { transform: none; }
-  /* Lista de lugares: sin deslizamiento al tocar */
   .stops-also-list li:hover { padding-left: 0; }
+  .stops-also-list li { transition: none; }
+  .info-item:hover { transform: none; border-left-color: transparent; }
+  .btn-terra:hover { transform: none; gap: .75rem; }
 }
 
 /* ─── PRELOADER ─── */
@@ -331,8 +342,8 @@ nav.scrolled {
   padding: .7rem 0;
   overflow: hidden;
   position: relative;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .ticker::before { display: none; }
 .ticker-track {
@@ -541,6 +552,22 @@ nav.scrolled {
   max-width: 480px; color: rgba(240, 224, 208, .65);
   font-size: clamp(.95rem, 1.2vw, 1.05rem); line-height: 1.8;
 }
+.tour-cta-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 4rem 6rem;
+}
+.btn-terra {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: var(--terra); color: var(--sand);
+  padding: 1rem 2.2rem; text-decoration: none;
+  font-size: clamp(.78rem, 1vw, .88rem);
+  letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
+  transition: background .3s, transform .3s, gap .3s;
+  align-self: flex-start;
+}
+.btn-terra:hover { background: #b05535; transform: translateY(-3px); gap: 1.1rem; }
+.btn-terra svg { width: 18px; height: 18px; fill: var(--sand); flex-shrink: 0; }
 /* ─── STOPS STRIP (foto-cards expandibles) ─── */
 .stops-strip { display: flex; gap: 3px; padding: 0 4rem; }
 .stop-card {
@@ -1041,6 +1068,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .pl-word { text-align: center; }
   nav { padding: 1.4rem 1.5rem; }
   nav.scrolled { padding: .9rem 1.5rem; }
   .nav-links { display: none; }
@@ -1064,9 +1092,11 @@ footer {
   .tour-meta-pill { font-size: .6rem; padding: .4rem 1rem; }
   .tour-intro-p { font-size: clamp(.85rem, 3.5vw, 1rem); }
   .tour { padding: 4rem 0 2.5rem; }
+  .ticker-track { animation-duration: 18s; }
   .stops-strip { flex-direction: column; padding: 0 2rem; gap: 3px; }
-  /* Altura automática en mobile para que el contenido respire */
-  .stop-card { height: auto; min-height: 320px; }
+  /* Altura fija en mobile — necesaria para que img height:100% funcione */
+  .stop-card { height: 72vw; min-height: 340px; }
+  .stop-overlay { padding: 1.6rem; }
   .stops-also {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -1077,6 +1107,7 @@ footer {
   .stops-also-sub { max-width: 100%; }
   .stops-also-list { grid-template-columns: 1fr 1fr; }
   .stops-also-list li { font-size: clamp(.8rem, 3.5vw, 1rem); padding-right: .8rem; }
+  .tour-cta-wrap { padding: 0 1.5rem 4rem; }
   .route-timeline::before { left: 24px; transform: none; }
   .route-stop {
     grid-template-columns: 48px 1fr;
