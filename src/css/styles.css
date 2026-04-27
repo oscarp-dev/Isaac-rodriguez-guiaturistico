@@ -50,6 +50,30 @@ body {
 @media (hover: none) {
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
+
+  /* ── Stop cards: estado "activado" por defecto en táctil ── */
+  .stop-card img {
+    filter: brightness(.58) saturate(.95);
+  }
+  /* Evita el expand al tocar */
+  .stop-card:hover { flex: 1 !important; }
+  .stop-card:hover img {
+    filter: brightness(.58) saturate(.95) !important;
+    transform: none !important;
+  }
+  /* Nombre siempre horizontal */
+  .stop-card .stop-name { writing-mode: horizontal-tb; }
+  /* Contenido siempre visible */
+  .stop-card .stop-tag,
+  .stop-card .stop-desc,
+  .stop-card .stop-icon-row {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Círculo del route-timeline: sin hover scale */
+  .route-stop:hover .route-circle { transform: none; }
+  /* Lista de lugares: sin deslizamiento al tocar */
+  .stops-also-list li:hover { padding-left: 0; }
 }
 
 /* ─── PRELOADER ─── */
@@ -1017,29 +1041,32 @@ footer {
 }
 
 @media (max-width: 768px) {
-  nav { padding: 1.6rem 1.8rem; }
-  nav.scrolled { padding: 1rem 1.8rem; }
+  nav { padding: 1.4rem 1.5rem; }
+  nav.scrolled { padding: .9rem 1.5rem; }
   .nav-links { display: none; }
   .burger { display: flex; }
-  .hero-inner { padding: 0 2rem 6rem; grid-template-columns: 1fr; }
+  /* Hero: título más pequeño para que no desborde en pantallas estrechas */
+  .hero-h1 { font-size: clamp(3rem, 13vw, 5rem); }
+  .hero-inner { padding: 0 1.5rem 4rem; grid-template-columns: 1fr; }
   .hero-right { align-items: flex-start; }
-  .hero-sub { text-align: left; max-width: 100%; }
+  .hero-sub { text-align: left; max-width: 100%; font-size: clamp(.88rem, 3.8vw, 1.05rem); }
+  .hero-btn { font-size: .72rem; padding: .95rem 1.6rem; }
   .hero-scroll { display: none; }
-  .about { padding: 4rem 2rem; }
-  .about-inner { gap: 3rem; }
-  .about-photo-wrap { max-width: 240px; }
-  .ciudad-head { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 0 2rem; }
-  .ciudad-desc { text-align: left; max-width: 100%; }
-  .ciudad { padding: 5rem 0 3rem; }
-  .tour-head { padding: 0 2rem; }
-  .tour-meta-row { padding: 0 2rem; gap: 1rem; }
-  .tour { padding: 5rem 0 3rem; }
-  .stops-strip { flex-direction: column; padding: 0 2rem; gap: 2px; }
-  .stop-card { height: 55vw; min-height: 260px; }
-  .stop-card .stop-name { writing-mode: horizontal-tb; }
-  .stop-card .stop-tag,
-  .stop-card .stop-desc,
-  .stop-card .stop-icon-row { opacity: 1; transform: none; }
+  .about { padding: 3.5rem 1.5rem; }
+  .about-inner { gap: 2.5rem; }
+  .about-photo-wrap { max-width: 220px; }
+  .ciudad-head { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding: 0 1.5rem; }
+  .ciudad-desc { text-align: left; max-width: 100%; font-size: clamp(.85rem, 3.5vw, 1rem); }
+  .ciudad { padding: 4rem 0 2.5rem; }
+  .tour-head { padding: 0 1.5rem; }
+  .tour-h2 { font-size: clamp(3rem, 12vw, 5rem); }
+  .tour-meta-row { padding: 0 1.5rem; gap: .8rem; flex-wrap: wrap; }
+  .tour-meta-pill { font-size: .6rem; padding: .4rem 1rem; }
+  .tour-intro-p { font-size: clamp(.85rem, 3.5vw, 1rem); }
+  .tour { padding: 4rem 0 2.5rem; }
+  .stops-strip { flex-direction: column; padding: 0 2rem; gap: 3px; }
+  /* Altura automática en mobile para que el contenido respire */
+  .stop-card { height: auto; min-height: 320px; }
   .stops-also {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -1086,13 +1113,16 @@ footer {
   .route-stop-name { font-size: clamp(1.8rem, 7vw, 2.6rem); }
   .route-stop-desc { max-width: 100%; }
   .route-sep { padding: 1.5rem 0; }
-  .quote-sec { padding: 5rem 2rem; }
-  .big-q { font-size: 7rem; }
+  .quote-sec { padding: 4rem 1.5rem; }
+  .big-q { font-size: 5rem; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer-bottom { flex-direction: column; gap: .8rem; text-align: center; }
-  footer { padding: 4rem 2rem 2.5rem; }
-  .contacto { padding: 5rem 2rem; }
-  .cta-h2 { font-size: clamp(3rem, 12vw, 6rem); }
-  .parallax-interlude { height: 45vh; }
-  .pi-title { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+  footer { padding: 3.5rem 1.5rem 2rem; }
+  .contacto { padding: 4rem 1.5rem; }
+  .wa-big { padding: 1.1rem 2rem; font-size: .78rem; }
+  .cta-h2 { font-size: clamp(2.8rem, 11vw, 5rem); }
+  .cta-sub { font-size: clamp(.88rem, 3.8vw, 1.1rem); }
+  .btn-wa-lg { padding: 1.1rem 2rem; font-size: .78rem; }
+  .parallax-interlude { height: 40vh; }
+  .pi-title { font-size: clamp(2.2rem, 7.5vw, 4rem); }
 }

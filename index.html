@@ -3,22 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>We Are Alicante – Isaac Rodríguez, Guía Turístico</title>
-  <meta name="description" content="Reserva tu tour privado por Alicante con Isaac Rodríguez. Grupos pequeños, confirmación en 2 horas. Historia, gastronomía y los rincones que no encontrarás en ningún folleto.">
 
-  <!-- Fuentes -->
+  <!-- ═══ SEO PRIMARIO ═══ -->
+  <title>We Are Alicante – Tour a pie por Alicante | Isaac Rodríguez, Guía Turístico</title>
+  <meta name="description" content="Reserva tu tour a pie por Alicante con Isaac Rodríguez. Grupos pequeños, confirmación en menos de 2 horas. Historia real, gastronomía local y los rincones que ningún folleto te muestra.">
+  <meta name="keywords" content="tour Alicante, guía turístico Alicante, visita guiada Alicante, tour a pie Alicante, Isaac Rodríguez guía, We Are Alicante, qué ver en Alicante, Castillo Santa Bárbara, Explanada Alicante">
+  <meta name="author" content="Isaac Rodríguez – We Are Alicante">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://wearealicante.vercel.app/">
+
+  <!-- ═══ FAVICON ═══ -->
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32"   href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16"   href="assets/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180"       href="assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <meta name="theme-color" content="#224433">
+  <meta name="msapplication-TileColor" content="#224433">
+
+  <!-- ═══ OPEN GRAPH – Facebook, WhatsApp, LinkedIn ═══ -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://wearealicante.vercel.app/">
+  <meta property="og:site_name"   content="We Are Alicante">
+  <meta property="og:locale"      content="es_ES">
+  <meta property="og:title"       content="We Are Alicante – Tour a pie por Alicante con Isaac Rodríguez">
+  <meta property="og:description" content="El tour que te muestra Alicante de verdad. Grupos pequeños, plazas limitadas y confirmación en menos de 2 horas. Historia, gastronomía y los rincones auténticos de la ciudad.">
+  <meta property="og:image"       content="https://wearealicante.vercel.app/assets/images/og-image.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"   content="Tour a pie por Alicante – We Are Alicante">
+
+  <!-- ═══ TWITTER CARD ═══ -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="We Are Alicante – Tour a pie por Alicante">
+  <meta name="twitter:description" content="El tour que te muestra Alicante de verdad. Grupos pequeños, confirmación en 2 horas.">
+  <meta name="twitter:image"       content="https://wearealicante.vercel.app/assets/images/og-image.jpg">
+
+  <!-- ═══ DATOS ESTRUCTURADOS JSON-LD ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://wearealicante.vercel.app/#business",
+        "name": "We Are Alicante",
+        "description": "Tour a pie por Alicante con Isaac Rodríguez, guía turístico local. Grupos pequeños, historia real, gastronomía y los rincones auténticos que ningún folleto te muestra.",
+        "url": "https://wearealicante.vercel.app",
+        "telephone": "+34600000000",
+        "image": "https://wearealicante.vercel.app/assets/images/og-image.jpg",
+        "logo": "https://wearealicante.vercel.app/assets/images/logo.svg",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Cash, Credit Card",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "La Explanada de España",
+          "addressLocality": "Alicante",
+          "addressRegion": "Comunitat Valenciana",
+          "postalCode": "03001",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 38.3452,
+          "longitude": -0.4815
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
+        "inLanguage": ["es", "en"],
+        "sameAs": []
+      },
+      {
+        "@type": "TouristTrip",
+        "@id": "https://wearealicante.vercel.app/#tour",
+        "name": "Tour a pie por Alicante – We Are Alicante",
+        "description": "Recorrido a pie de 2h30min por los rincones más auténticos de Alicante: La Explanada, Castillo de Santa Bárbara, Barrio de Santa Cruz, Playa del Postiguet y mucho más. Grupos pequeños, plazas limitadas.",
+        "url": "https://wearealicante.vercel.app",
+        "provider": { "@id": "https://wearealicante.vercel.app/#business" },
+        "touristType": ["Familias", "Parejas", "Viajeros en solitario"],
+        "inLanguage": ["es", "en"],
+        "duration": "PT2H30M",
+        "itinerary": {
+          "@type": "ItemList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "La Explanada de España" },
+            { "@type": "ListItem", "position": 2, "name": "Castillo de Santa Bárbara" },
+            { "@type": "ListItem", "position": 3, "name": "Barrio de Santa Cruz" },
+            { "@type": "ListItem", "position": 4, "name": "Playa del Postiguet" },
+            { "@type": "ListItem", "position": 5, "name": "Plaza Gabriel Miró" },
+            { "@type": "ListItem", "position": 6, "name": "Concatedral San Nicolás" },
+            { "@type": "ListItem", "position": 7, "name": "Basílica Santa María" },
+            { "@type": "ListItem", "position": 8, "name": "Mercado Central" },
+            { "@type": "ListItem", "position": 9, "name": "Casco Antiguo" }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ FUENTES ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Preload imágenes críticas (hero + primera sección visible) -->
+  <!-- ═══ PRELOAD IMÁGENES CRÍTICAS ═══ -->
   <link rel="preload" as="image" href="assets/images/img_castillo_sunset.webp">
 
-  <!-- DNS prefetch para recursos externos -->
-  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <!-- ═══ DNS PREFETCH ═══ -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://wa.me">
 
-  <!-- Estilos -->
+  <!-- ═══ ESTILOS ═══ -->
   <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
@@ -251,7 +352,7 @@
     <div class="about-right">
       <p class="tag reveal">Tu guía</p>
       <h2 class="about-h2 reveal r1">Aquí<br>te sientes<br><em>en casa.</em></h2>
-      <p class="about-p reveal r2">Hay ciudades que se visitan. Y hay ciudades que se <em>sienten</em>. Alicante es de las segundas — y yo te llevo a la que no aparece en los folletos: la que vive detrás de cada fachada, en la historia que guarda esa esquina que todo el mundo cruza sin mirar, en el bar donde el tiempo todavía va despacio.</p>
+      <p class="about-p reveal r2">Hay ciudades que se visitan. Y hay ciudades que se <em>sienten</em>. Alicante es de las segundas — y yo te llevo a lo que no se ve a simple vista: la que vive detrás de cada fachada,esas calles que susurran historias, esa esquina que todo el mundo cruza sin mirar .</p>
       <p class="about-p reveal r2">Contigo no vas a ver monumentos. Vas a <strong>entrar</strong> en la ciudad.</p>
       <blockquote class="about-quote reveal r3">"Alicante no se visita,<br>se <em>siente</em>."</blockquote>
       <p class="about-sig reveal r4">Isaac Rodríguez</p>

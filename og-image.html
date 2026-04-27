@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,900&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #162B1F;
+    }
+
+    .og {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Foto de fondo */
+    .og-photo {
+      position: absolute;
+      inset: 0;
+      background:
+        url('assets/images/img_castillo_sunset.webp')
+        center / cover no-repeat;
+    }
+
+    /* Degradado: oscuro izquierda, transparente derecha */
+    .og-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        108deg,
+        rgba(22, 43, 31, 0.97) 0%,
+        rgba(22, 43, 31, 0.88) 42%,
+        rgba(22, 43, 31, 0.38) 72%,
+        rgba(22, 43, 31, 0.12) 100%
+      );
+    }
+
+    /* Borde terracota derecho, como acento editorial */
+    .og-accent {
+      position: absolute;
+      top: 0; bottom: 0;
+      right: 0;
+      width: 5px;
+      background: #CC6644;
+    }
+
+    /* Línea decorativa arriba */
+    .og-line-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, #DDCC77 0%, transparent 60%);
+    }
+
+    /* Contenido */
+    .og-content {
+      position: absolute;
+      inset: 0;
+      padding: 52px 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 720px;
+    }
+
+    /* Logo */
+    .og-logo {
+      height: 48px;
+      width: auto;
+      display: block;
+      opacity: 0.92;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    }
+
+    /* Bloque central */
+    .og-mid {}
+
+    .og-kicker {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #DDCC77;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .og-kicker::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: #DDCC77;
+      opacity: 0.6;
+    }
+
+    .og-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 92px;
+      font-weight: 900;
+      line-height: 0.87;
+      color: #F0E0D0;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 26px;
+    }
+    .og-h1 em {
+      font-style: italic;
+      color: #CC6644;
+      display: block;
+    }
+
+    .og-sub {
+      font-size: 17.5px;
+      font-weight: 300;
+      color: rgba(240, 224, 208, 0.62);
+      line-height: 1.65;
+      max-width: 480px;
+    }
+
+    /* Footer */
+    .og-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .og-pills {
+      display: flex;
+      gap: 10px;
+    }
+    .og-pill {
+      border: 1px solid rgba(196, 169, 140, 0.3);
+      padding: 7px 18px;
+      font-size: 11.5px;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(240, 224, 208, 0.55);
+    }
+    .og-pill strong {
+      color: #DDCC77;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0;
+      margin-left: 5px;
+    }
+
+    .og-url {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: rgba(240, 224, 208, 0.28);
+      text-transform: lowercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+
+    <div class="og-photo"></div>
+    <div class="og-overlay"></div>
+    <div class="og-line-top"></div>
+    <div class="og-accent"></div>
+
+    <div class="og-content">
+
+      <img src="assets/images/logo.svg" alt="We Are Alicante" class="og-logo">
+
+      <div class="og-mid">
+        <p class="og-kicker">Tour a pie · Alicante, España</p>
+        <h1 class="og-h1">We Are<br><em>Alicante.</em></h1>
+        <p class="og-sub">El tour que te muestra Alicante de verdad. Historia real, gastronomía local y los rincones que ningún folleto te muestra.</p>
+      </div>
+
+      <div class="og-footer">
+        <div class="og-pills">
+          <span class="og-pill">Duración <strong>2:30 hrs</strong></span>
+          <span class="og-pill">Idiomas <strong>ES · EN</strong></span>
+          <span class="og-pill">Grupos <strong>pequeños</strong></span>
+        </div>
+        <span class="og-url">wearealicante.vercel.app</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
