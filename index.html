@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Are Alicante – Isaac Rodríguez, Guía Turístico</title>
+  <meta name="description" content="Reserva tu tour privado por Alicante con Isaac Rodríguez. Grupos pequeños, confirmación en 2 horas. Historia, gastronomía y los rincones que no encontrarás en ningún folleto.">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Preload imágenes críticas (hero + primera sección visible) -->
+  <link rel="preload" as="image" href="assets/images/img_castillo_sunset.webp">
+
+  <!-- DNS prefetch para recursos externos -->
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://wa.me">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="pl-word"><span>WE</span>&nbsp;<span>ARE</span>&nbsp;<span>ALICANTE</span></div>
+  <div class="pl-line"></div>
+  <p class="pl-em">Isaac Rodríguez · Guía Turístico</p>
+</div>
+
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/34600000000?text=Hola%20Isaac!%20Me%20gustaría%20reservar%20una%20experiencia%20contigo%20en%20Alicante"
+   target="_blank" class="float-wa" aria-label="Reservar por WhatsApp">
+  <div class="float-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- MENÚ MÓVIL -->
+<div class="mob-nav" id="mobNav">
+  <a href="#tours"   onclick="closeMob()">El Tour</a>
+  <a href="#about"   onclick="closeMob()">El Guía</a>
+  <a href="#ciudad"  onclick="closeMob()">La Ciudad</a>
+  <a href="#contacto" onclick="closeMob()">Reservar</a>
+  <span class="mob-sub">We Are Alicante</span>
+</div>
+
+<!-- NAVEGACIÓN -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="assets/images/logo.svg" alt="We Are Alicante" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tours">El Tour</a></li>
+    <li><a href="#about">El Guía</a></li>
+    <li><a href="#ciudad">La Ciudad</a></li>
+    <li><a href="https://wa.me/34600000000?text=Hola%20Isaac!" target="_blank" class="nav-cta">Reservar</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-kicker">Tour a pie · Alicante, España</p>
+      <span class="hero-deco"></span>
+      <h1 class="hero-h1">
+        <span class="ln"><span>We Are</span></span>
+        <span class="ln"><span><em>Alicante</em></span></span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-sub">El tour que te muestra Alicante de verdad. Grupos pequeños, plazas limitadas y confirmación en menos de 2 horas.</p>
+      <a href="https://wa.me/34600000000?text=Hola%20Isaac!%20Me%20gustaría%20reservar%20una%20experiencia%20contigo%20en%20Alicante"
+         target="_blank" class="hero-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Reservar mi plaza
+      </a>
+    </div>
+  </div>
+  <span class="hero-scroll">El tour</span>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>La Explanada</span><span class="dot">✦</span>
+    <span>Plaza Gabriel Miró</span><span class="dot">✦</span>
+    <span>Calle de las Setas</span><span class="dot">✦</span>
+    <span>Concatedral San Nicolás</span><span class="dot">✦</span>
+    <span>Basílica Santa María</span><span class="dot">✦</span>
+    <span>Cara del Moro</span><span class="dot">✦</span>
+    <span>Museo de Aguas</span><span class="dot">✦</span>
+    <span>Ermita San Roque</span><span class="dot">✦</span>
+    <span>Barrio Santa Cruz</span><span class="dot">✦</span>
+    <span>Mercado Central</span><span class="dot">✦</span>
+    <span>Casco Antiguo</span><span class="dot">✦</span>
+    <span>La Explanada</span><span class="dot">✦</span>
+    <span>Plaza Gabriel Miró</span><span class="dot">✦</span>
+    <span>Calle de las Setas</span><span class="dot">✦</span>
+    <span>Concatedral San Nicolás</span><span class="dot">✦</span>
+    <span>Basílica Santa María</span><span class="dot">✦</span>
+    <span>Cara del Moro</span><span class="dot">✦</span>
+    <span>Museo de Aguas</span><span class="dot">✦</span>
+    <span>Ermita San Roque</span><span class="dot">✦</span>
+    <span>Barrio Santa Cruz</span><span class="dot">✦</span>
+    <span>Mercado Central</span><span class="dot">✦</span>
+    <span>Casco Antiguo</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     EL TOUR
+════════════════════════════════════ -->
+<section class="tour" id="tours">
+
+  <div class="tour-head">
+    <h2 class="tour-h2 reveal">El<br><em>Tour</em></h2>
+  </div>
+
+  <div class="tour-meta-row">
+    <div class="tour-meta-pill reveal">Duración <span>2:30Hrs</span></div>
+    <div class="tour-meta-pill reveal r1">Idiomas <span>ES · EN</span></div>
+    <div class="tour-meta-pill reveal r2">Grupo <span>Plazas limitadas</span></div>
+    <p class="tour-intro-p reveal r2">Dos horas y media por los rincones que ningún folleto te muestra. Historia, gastronomía y los secretos de Alicante guiados por quien la vive cada día. Escríbeme y en menos de dos horas tienes tu plaza confirmada.</p>
+  </div>
+
+  <!-- Foto-cards expandibles: paradas 01-04 -->
+  <div class="stops-strip">
+
+    <div class="stop-card reveal">
+      <img src="assets/images/img_explanada2.webp" alt="La Explanada de España" loading="lazy">
+      <div class="stop-overlay">
+        <span class="stop-num">01</span>
+        <div class="stop-name-wrap">
+          <p class="stop-name">La Explanada</p>
+        </div>
+        <span class="stop-tag">Punto de encuentro</span>
+        <p class="stop-desc">El corazón de Alicante. Mosaico de mármol único en España, palmeras centenarias y el Mediterráneo como telón de fondo.</p>
+        <div class="stop-icon-row">
+          <div class="stop-dot"></div>
+          <span class="stop-detail">Inicio del recorrido</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop-card reveal r1">
+      <img src="assets/images/img_castillo_sunset.webp" alt="Castillo de Santa Bárbara" loading="lazy">
+      <div class="stop-overlay">
+        <span class="stop-num">02</span>
+        <div class="stop-name-wrap">
+          <p class="stop-name">Castillo de Santa Bárbara</p>
+        </div>
+        <span class="stop-tag">Historia · Vistas 360°</span>
+        <p class="stop-desc">Mil años de historia y las mejores vistas sobre el Mediterráneo. 166 metros sobre la ciudad.</p>
+        <div class="stop-icon-row">
+          <div class="stop-dot"></div>
+          <span class="stop-detail">Monte Benacantil</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop-card reveal r2">
+      <img src="assets/images/img_barrio_santa_cruz (2).jpg" alt="Barrio de Santa Cruz" loading="lazy">
+      <div class="stop-overlay">
+        <span class="stop-num">03</span>
+        <div class="stop-name-wrap">
+          <p class="stop-name">Barrio de Santa Cruz</p>
+        </div>
+        <span class="stop-tag">Casco Antiguo · Autenticidad</span>
+        <p class="stop-desc">Calles estrechas, flores en las ventanas y el tiempo yendo más despacio. El alma más auténtica de Alicante.</p>
+        <div class="stop-icon-row">
+          <div class="stop-dot"></div>
+          <span class="stop-detail">Barrio histórico</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop-card reveal r3">
+      <img src="assets/images/img_playa_castillo.webp" alt="Playa del Postiguet" loading="lazy">
+      <div class="stop-overlay">
+        <span class="stop-num">04</span>
+        <div class="stop-name-wrap">
+          <p class="stop-name">Playa del Postiguet</p>
+        </div>
+        <span class="stop-tag">Mar · Mediterráneo</span>
+        <p class="stop-desc">Arena dorada, agua cristalina y el castillo vigilando desde lo alto. Ciudad y mar en perfecto equilibrio.</p>
+        <div class="stop-icon-row">
+          <div class="stop-dot"></div>
+          <span class="stop-detail">Frente al centro</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lista de lugares del recorrido -->
+  <div class="stops-also reveal">
+
+    <div class="stops-also-head">
+      <p class="stops-also-kicker">13 lugares · 2h 30min</p>
+      <h3 class="stops-also-h3">Cada rincón,<br><em>una historia.</em></h3>
+      <p class="stops-also-sub">Estos son algunos de los lugares que forman parte del recorrido. No en un orden fijo </p>
+    </div>
+
+    <ul class="stops-also-list">
+      <li><span class="stops-also-num">·</span>Plaza Gabriel Miró</li>
+      <li><span class="stops-also-num">·</span>Calle de las Setas</li>
+      <li><span class="stops-also-num">·</span>Concatedral San Nicolás</li>
+      <li><span class="stops-also-num">·</span>Basílica Santa María</li>
+      <li><span class="stops-also-num">·</span>Cara del Moro</li>
+      <li><span class="stops-also-num">·</span>Museo de Aguas</li>
+      <li><span class="stops-also-num">·</span>Ermita San Roque</li>
+      <li><span class="stops-also-num">·</span>Mercado Central</li>
+      <li><span class="stops-also-num">·</span>Casco Antiguo</li>
+    </ul>
+
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════
+     SOBRE ISAAC
+════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="about-inner">
+
+    <div class="about-left reveal">
+      <div class="about-photo-wrap">
+        <img
+          src="assets/images/isaac.webp"
+          alt="Isaac Rodríguez — Guía Turístico Alicante"
+          class="about-photo"
+          fetchpriority="high"
+        >
+        <span class="about-photo-badge">Isaac Rodríguez · Guía Turístico</span>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <p class="tag reveal">Tu guía</p>
+      <h2 class="about-h2 reveal r1">Aquí<br>te sientes<br><em>en casa.</em></h2>
+      <p class="about-p reveal r2">Hay ciudades que se visitan. Y hay ciudades que se <em>sienten</em>. Alicante es de las segundas — y yo te llevo a la que no aparece en los folletos: la que vive detrás de cada fachada, en la historia que guarda esa esquina que todo el mundo cruza sin mirar, en el bar donde el tiempo todavía va despacio.</p>
+      <p class="about-p reveal r2">Contigo no vas a ver monumentos. Vas a <strong>entrar</strong> en la ciudad.</p>
+      <blockquote class="about-quote reveal r3">"Alicante no se visita,<br>se <em>siente</em>."</blockquote>
+      <p class="about-sig reveal r4">Isaac Rodríguez</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     LA CIUDAD
+════════════════════════════════════ -->
+<section class="ciudad" id="ciudad">
+  <div class="ciudad-head">
+    <h2 class="ciudad-h2 reveal">La<br><em>Ciudad</em></h2>
+    <p class="ciudad-desc reveal r1">Alicante es luz, mar y piedra milenaria. Cada rincón guarda una historia. Déjate sorprender.</p>
+  </div>
+  <div class="mosaic">
+    <div class="m-item reveal">
+      <img src="assets/images/img_playa_castillo.webp" alt="Playa del Postiguet con Castillo de Santa Bárbara" loading="lazy">
+      <div class="m-label"><strong>Playa del Postiguet</strong><span>Arena dorada frente al castillo</span></div>
+    </div>
+    <div class="m-item reveal r1">
+      <img src="assets/images/img_explanada1.webp" alt="La Explanada de España, Alicante" loading="lazy">
+      <div class="m-label"><strong>La Explanada de España</strong><span>El paseo más icónico de la ciudad</span></div>
+    </div>
+    <div class="m-item reveal r2">
+      <img src="assets/images/img_ciudad_atardecer.webp" alt="Alicante al atardecer desde el castillo" loading="lazy">
+      <div class="m-label"><strong>Alicante al Atardecer</strong><span>La ciudad que se enciende de oro</span></div>
+    </div>
+    <div class="m-item reveal r1">
+      <img src="assets/images/img_castillo_sunset.webp" alt="Castillo de Santa Bárbara al atardecer" loading="lazy">
+      <div class="m-label"><strong>Castillo de Santa Bárbara</strong><span>El guardián de Alicante</span></div>
+    </div>
+    <div class="m-item reveal r2">
+      <img src="assets/images/img_explanada2.webp" alt="La Explanada de España con palmeras" loading="lazy">
+      <div class="m-label"><strong>La Explanada · Mosaico</strong><span>Suelo de mármol y palmeras centenarias</span></div>
+    </div>
+    <div class="m-item reveal r1">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=85" alt="Mercado Central de Alicante" loading="lazy">
+      <div class="m-label"><strong>Mercado Central</strong><span>Colores y sabores mediterráneos</span></div>
+    </div>
+    <div class="m-item reveal r2">
+      <img src="assets/images/img_barrio_santa_cruz (2).jpg" alt="Barrio de Santa Cruz" loading="lazy">
+      <div class="m-label"><strong>Barrio de Santa Cruz</strong><span>Calles que huelen a historia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX INTERLUDE -->
+<div class="parallax-interlude" id="interlude">
+  <div class="pi-bg" id="piBg"></div>
+  <div class="pi-inner">
+    <p class="pi-kicker reveal">Visto desde arriba</p>
+    <h2 class="pi-title reveal r1">Una ciudad<br>que te <em>enamora</em></h2>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     CONTACTO
+════════════════════════════════════ -->
+<section class="contacto" id="contacto">
+  <div>
+    <p class="tag reveal" style="color: var(--terra)">Reservas</p>
+    <h2 class="contacto-h2 reveal r1">Reserva<br>tu plaza<br><em>ahora</em></h2>
+    <p class="contacto-p reveal r2">Sin formularios, sin esperas. Escríbeme por WhatsApp, cuéntame tu fecha y el número de personas — y en menos de dos horas tienes la confirmación.</p>
+    <a href="https://wa.me/34600000000?text=Hola%20Isaac!%20Me%20gustaría%20reservar%20una%20experiencia%20contigo%20en%20Alicante"
+       target="_blank" class="wa-big reveal r3">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escribir a Isaac por WhatsApp
+    </a>
+  </div>
+
+  <div>
+    <div class="info-items">
+      <div class="info-item reveal">
+        <span class="info-icon">01</span>
+        <div>
+          <p class="info-title">Tour a medida</p>
+          <p class="info-txt">Grupos pequeños, plazas limitadas. Adaptamos el ritmo, el idioma y las paradas a lo que tú quieres ver.</p>
+        </div>
+      </div>
+      <div class="info-item reveal r1">
+        <span class="info-icon">02</span>
+        <div>
+          <p class="info-title">Idiomas</p>
+          <p class="info-txt">Tours disponibles en Español · English</p>
+        </div>
+      </div>
+      <div class="info-item reveal r2">
+        <span class="info-icon">03</span>
+        <div>
+          <p class="info-title">Disponibilidad</p>
+          <p class="info-txt">Disponible casi todos los días del año. Confirmación en menos de 2 horas.</p>
+        </div>
+      </div>
+      <div class="info-item reveal r3">
+        <span class="info-icon">04</span>
+        <div>
+          <p class="info-title">Contacto directo</p>
+          <p class="info-txt">WhatsApp: +34 600 000 000<br>Email: isaac@wearealicante.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-bg" id="ctaBg"></div>
+  <div class="cta-inner">
+    <p class="cta-kicker reveal">Plazas limitadas · Confirmación en 2 horas</p>
+    <h2 class="cta-h2 reveal r1">Tu plaza<br><em>te espera</em></h2>
+    <p class="cta-sub reveal r2">Solo necesitas escribirme. Cuéntame tu fecha, cuántos sois y si prefieres en español o en inglés. El resto lo pongo yo.</p>
+    <a href="https://wa.me/34600000000?text=Hola%20Isaac!%20Me%20gustaría%20reservar%20una%20experiencia%20contigo%20en%20Alicante"
+       target="_blank" class="btn-wa-lg reveal r3">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Reservar por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="assets/images/logo.svg" alt="We Are Alicante" class="footer-logo-img">
+      <p class="footer-tagline">Tour a pie por Alicante con Isaac Rodríguez. Grupos pequeños, plazas limitadas y una experiencia que no encontrarás en ningún folleto.</p>
+    </div>
+    <div>
+      <p class="footer-col-h">El Tour</p>
+      <ul class="footer-ul">
+        <li><a href="#tours">La Explanada</a></li>
+        <li><a href="#tours">Castillo de Santa Bárbara</a></li>
+        <li><a href="#tours">Barrio de Santa Cruz</a></li>
+        <li><a href="#tours">Playa del Postiguet</a></li>
+        <li><a href="#tours">Más paradas próximamente</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-h">Contacto</p>
+      <ul class="footer-ul">
+        <li><a href="https://wa.me/34600000000" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:isaac@wearealicante.com">Email</a></li>
+        <li><a href="#" target="_blank">Instagram</a></li>
+        <li><a href="#" target="_blank">TripAdvisor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 We Are Alicante · Isaac Rodríguez. Todos los derechos reservados.</p>
+    <p class="footer-copy">Guía Oficial · Alicante, España 🌊</p>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="src/js/main.js"></script>
+
+</body>
+</html>
