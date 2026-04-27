@@ -1,0 +1,12 @@
+# Claude Code (contexto de conversación, no es parte del proyecto)
+.claude/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+*.swp
+*.swo
