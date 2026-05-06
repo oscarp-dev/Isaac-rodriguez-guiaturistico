@@ -83,15 +83,6 @@ window.addEventListener('scroll', () => {
     heroBg.style.transform = `scale(1.08) translateY(${y * 0.28}px)`;
   }
 
-  // Parallax interlude background
-  const piBg = document.getElementById('piBg');
-  if (piBg) {
-    const r = piBg.parentElement.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < window.innerHeight) {
-      piBg.style.transform = `scale(1.1) translateY(${-r.top * 0.18}px)`;
-    }
-  }
-
   // CTA final background
   const ctaBg = document.getElementById('ctaBg');
   if (ctaBg) {
