@@ -52,13 +52,13 @@ body {
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
 
-  /* Hero: imagen mobile — versión única sin @2x */
+  /* Hero: imagen mobile — usa la principal hasta tener la versión sm */
   .hero-bg {
     background-image:
       linear-gradient(to bottom, rgba(0,0,0,.28) 0%, transparent 90px),
       linear-gradient(to top, rgba(58,32,22,.90) 0%, rgba(58,32,22,.22) 50%, transparent 72%),
       linear-gradient(to right, rgba(58,32,22,.52) 0%, transparent 58%),
-      url('../../assets/images/img_castillo_sunset-sm.webp');
+      url('../../assets/images/img_castillo_sunset.webp');
     background-position: center;
     background-size: cover;
   }
@@ -1174,7 +1174,10 @@ footer { margin-top: 0; display: block; }
   .quote-sec { padding: 3rem 1.5rem; }
   .big-q { font-size: 4rem; }
   footer { padding: 2rem 1.5rem 1.2rem; }
+  .footer-top { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
   .footer-mid { justify-content: flex-start; }
+  .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem 1rem; }
+  .footer-nav a { font-size: .68rem; letter-spacing: .12em; }
   .footer-bottom { flex-direction: column; gap: .4rem; text-align: center; }
   .contacto { padding: 3rem 1.5rem; }
   .wa-big { padding: 1.1rem 2rem; font-size: .78rem; }
