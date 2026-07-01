@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://wearealicante.com/</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_castillo_sunset.webp</image:loc>
+      <image:title>Castillo de Santa Bárbara al atardecer – Alicante</image:title>
+      <image:caption>Vista del Castillo de Santa Bárbara, 166 metros sobre el Mediterráneo</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_explanada1.webp</image:loc>
+      <image:title>La Explanada de España – Alicante</image:title>
+      <image:caption>El paseo más icónico de Alicante, con mosaico de mármol y palmeras centenarias</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_explanada2.webp</image:loc>
+      <image:title>La Explanada de España – Mosaico de mármol</image:title>
+      <image:caption>Suelo de mármol tricolor y palmeras centenarias en La Explanada de España</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_playa_castillo.webp</image:loc>
+      <image:title>Playa del Postiguet con Castillo de Santa Bárbara</image:title>
+      <image:caption>Arena dorada frente al Castillo de Santa Bárbara, en el centro de Alicante</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_ciudad_atardecer.webp</image:loc>
+      <image:title>Alicante al atardecer desde el castillo</image:title>
+      <image:caption>Panorámica de Alicante al atardecer vista desde el Castillo de Santa Bárbara</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/img_barrio_santa_cruz.jpg</image:loc>
+      <image:title>Barrio de Santa Cruz – Alicante</image:title>
+      <image:caption>Calles estrechas con flores y el alma más auténtica del casco histórico de Alicante</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/isaac.webp</image:loc>
+      <image:title>Isaac Rodríguez – Guía Turístico Alicante</image:title>
+      <image:caption>Isaac Rodríguez, guía turístico local y creador de We Are Alicante</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://wearealicante.com/assets/images/og-image.png</image:loc>
+      <image:title>We Are Alicante – Tour a pie por Alicante</image:title>
+      <image:caption>Tour a pie por Alicante con Isaac Rodríguez. Grupos pequeños, historia real y gastronomía local</image:caption>
+    </image:image>
+
+  </url>
+</urlset>
