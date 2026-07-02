@@ -537,8 +537,14 @@ nav.scrolled .nav-cta:hover { background: var(--ember) !important; }
 .tour-h2 em { font-style: italic; color: var(--terra); }
 .tour-meta-row {
   padding: 0 4rem;
-  display: flex; align-items: center; gap: 3rem;
-  margin-bottom: 3.5rem; flex-wrap: wrap;
+  display: flex; flex-direction: column; gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+.tour-meta-pills {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.tour-meta-body {
+  display: flex; align-items: center; gap: 5rem;
 }
 .tour-meta-pill {
   display: inline-flex; align-items: center; gap: .6rem;
@@ -983,14 +989,14 @@ nav.scrolled .nav-cta:hover { background: var(--ember) !important; }
 }
 .btn-wa-lg {
   display: inline-flex; align-items: center; gap: 1rem;
-  background: #25D366; color: white;
+  background: var(--terra); color: var(--sand);
   padding: 1.3rem 3.2rem; text-decoration: none;
   font-size: clamp(.85rem, 1.1vw, 1rem);
   letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
   transition: background .3s, transform .3s, gap .3s;
 }
-.btn-wa-lg:hover { background: #1db954; transform: translateY(-4px); gap: 1.5rem; }
-.btn-wa-lg svg { width: 22px; height: 22px; fill: white; }
+.btn-wa-lg:hover { background: var(--ember); transform: translateY(-4px); gap: 1.5rem; }
+.btn-wa-lg svg { width: 22px; height: 22px; fill: var(--sand); }
 
 /* ─── FLOAT WHATSAPP ─── */
 .float-wa {
@@ -1100,8 +1106,10 @@ footer { margin-top: 0; display: block; }
   .ciudad { padding: 3rem 0 2rem; }
   .tour-head { padding: 0 1.5rem; }
   .tour-h2 { font-size: clamp(3rem, 12vw, 5rem); }
-  .tour-meta-row { padding: 0 1.5rem; gap: .8rem; flex-wrap: wrap; }
+  .tour-meta-row { padding: 0 1.5rem; gap: 1.5rem; }
+  .tour-meta-pills { gap: .6rem; }
   .tour-meta-pill { font-size: .6rem; padding: .4rem 1rem; }
+  .tour-meta-body { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .tour-intro-p { font-size: clamp(.85rem, 3.5vw, 1rem); }
   .tour { padding: 3rem 0 2rem; }
   .ticker-track { animation-duration: 18s; }
