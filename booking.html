@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Book Your Tour – We Are Alicante | Walking Tour Alicante</title>
+  <meta name="description" content="Book your walking tour in Alicante with Isaac Rodriguez. Small groups, instant confirmation. 12 stops, 2h30min of real history and hidden stories.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.wearealicante.com/booking.html">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://www.wearealicante.com/booking.html">
+  <meta property="og:site_name"   content="We Are Alicante">
+  <meta property="og:locale"      content="en_US">
+  <meta property="og:title"       content="Book Your Walking Tour – We Are Alicante">
+  <meta property="og:description" content="12 stops, 2h30min, small groups. Book the walking tour that shows you the real Alicante.">
+  <meta property="og:image"       content="https://www.wearealicante.com/assets/images/og-image.png">
+
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96x96.png">
+  <link rel="icon" type="image/x-icon"             href="assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180"      href="assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <meta name="theme-color" content="#224433">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="src/css/styles.css">
+
+  <style>
+    /* ─── NAV — visible desde el primer pixel (no hay hero oscuro detrás) ─── */
+    #mainNav {
+      background: rgba(58, 32, 22, .97) !important;
+      backdrop-filter: blur(14px) !important;
+      padding: .75rem 4rem !important;
+    }
+    @media (max-width: 768px) {
+      #mainNav { padding: .6rem 1.5rem !important; }
+    }
+
+    /* ─── PAGE ─── */
+    .bk-page { background: var(--cream); min-height: 100vh; }
+
+    /* ════════════════════════════════════
+       GALLERY — numbered mosaic
+    ════════════════════════════════════ */
+    .bk-gallery {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: 3px;
+    }
+    .bk-gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .bk-gallery-item:first-child { grid-row: 1 / 3; }
+    .bk-gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .65s cubic-bezier(.25,.46,.45,.94);
+    }
+    .bk-gallery-item:hover img { transform: scale(1.06); }
+    .bk-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(15,6,2,.45) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .35s;
+    }
+    .bk-gallery-item:hover .bk-gallery-overlay { opacity: 1; }
+    .bk-gallery-num {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(255,255,255,.9);
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .3s, transform .3s;
+      z-index: 2;
+    }
+    .bk-gallery-item:hover .bk-gallery-num {
+      opacity: 1;
+      transform: none;
+    }
+    .bk-gallery-zoom {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 2;
+    }
+    .bk-gallery-zoom svg { width: 14px; height: 14px; fill: white; }
+    .bk-gallery-item:hover .bk-gallery-zoom { opacity: 1; }
+
+    /* ════════════════════════════════════
+       LIGHTBOX
+    ════════════════════════════════════ */
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,4,2,.97);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .lb.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lb-img-wrap {
+      position: relative;
+      max-width: min(88vw, 1100px);
+      max-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      display: block;
+      transition: opacity .18s ease;
+    }
+    .lb-img.switching { opacity: 0; }
+    .lb-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px; height: 50px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      z-index: 9001;
+    }
+    .lb-btn:hover {
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.28);
+    }
+    .lb-prev { left: 1.5rem; }
+    .lb-next { right: 1.5rem; }
+    .lb-btn svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 1.8; }
+    .lb-close {
+      position: fixed;
+      top: 1.4rem; right: 1.4rem;
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s;
+      z-index: 9001;
+    }
+    .lb-close:hover { background: rgba(255,255,255,.14); }
+    .lb-close svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; }
+    .lb-counter {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 50%; transform: translateX(-50%);
+      font-size: .58rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.38);
+      z-index: 9001;
+      white-space: nowrap;
+    }
+    .lb-caption {
+      position: fixed;
+      bottom: 3.6rem;
+      left: 50%; transform: translateX(-50%);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .9rem;
+      color: rgba(255,255,255,.55);
+      z-index: 9001;
+      white-space: nowrap;
+    }
+
+    /* ════════════════════════════════════
+       TWO-COLUMN LAYOUT
+    ════════════════════════════════════ */
+    .bk-main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ─── LEFT ─── */
+    .bk-label {
+      font-size: .62rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.4rem;
+    }
+    .bk-label::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--terra);
+      flex-shrink: 0;
+    }
+
+    .bk-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.2vw, 4rem);
+      font-weight: 900;
+      color: var(--sienna);
+      text-transform: uppercase;
+      line-height: 1.02;
+      letter-spacing: -.01em;
+      margin-bottom: 2rem;
+    }
+    .bk-title em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .bk-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(139,69,19,.14);
+    }
+    .bk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      border: 1px solid rgba(139,69,19,.22);
+      padding: .5rem 1.1rem;
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(44,18,8,.5);
+      transition: border-color .2s, color .2s;
+    }
+    .bk-badge:hover {
+      border-color: rgba(139,69,19,.45);
+      color: rgba(44,18,8,.75);
+    }
+    .bk-badge svg {
+      width: 13px; height: 13px;
+      fill: var(--terra);
+      flex-shrink: 0;
+    }
+    .bk-badge strong {
+      color: var(--sienna);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: .88rem;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* ─── TABS ─── */
+    .bk-tabs-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(139,69,19,.16);
+      margin-bottom: 2.5rem;
+    }
+    .bk-tab {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(44,18,8,.55);
+      padding: .95rem 0;
+      margin-right: 2.4rem;
+      position: relative;
+      transition: color .2s;
+    }
+    .bk-tab.active {
+      font-weight: 800;
+      font-size: .74rem;
+    }
+    .bk-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .28s cubic-bezier(.25,.46,.45,.94);
+    }
+    .bk-tab:hover { color: rgba(44,18,8,.88); }
+    .bk-tab.active { color: var(--terra); }
+    .bk-tab.active::after { transform: scaleX(1); }
+    .bk-tab-panel { display: none; }
+    .bk-tab-panel.active {
+      display: block;
+      animation: tab-in .22s ease;
+    }
+    @keyframes tab-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .bk-desc {
+      font-size: clamp(1rem, 1.3vw, 1.08rem);
+      line-height: 1.9;
+      color: rgba(44,18,8,.72);
+      margin-bottom: 1.4rem;
+    }
+    .bk-desc strong { color: var(--sienna); font-weight: 700; }
+
+    .bk-included {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+    }
+    .bk-included li {
+      display: flex;
+      align-items: flex-start;
+      gap: .9rem;
+      font-size: clamp(.92rem, 1.15vw, 1rem);
+      color: rgba(44,18,8,.72);
+      line-height: 1.65;
+    }
+    .bk-included li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--terra);
+      flex-shrink: 0;
+      margin-top: .55em;
+    }
+
+    .bk-meeting {
+      padding: 1.5rem 1.8rem;
+      background: var(--sand);
+      border-left: 3px solid var(--terra);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+    }
+    .bk-meeting svg {
+      width: 18px; height: 18px;
+      fill: var(--terra);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .bk-meeting-label {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(44,18,8,.42);
+      margin-bottom: .3rem;
+    }
+    .bk-meeting-place {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--sienna);
+      font-style: italic;
+    }
+
+    /* ─── RIGHT ─── */
+    .bk-right {
+      position: sticky;
+      top: 90px;
+    }
+    .bk-widget-card {
+      background: white;
+      border: 1px solid rgba(139,69,19,.13);
+      box-shadow: 0 12px 48px rgba(58,32,22,.09);
+      overflow: hidden;
+    }
+    .bk-widget-header {
+      background: var(--deep);
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .bk-widget-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--sand);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .bk-widget-header-sub {
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(240,224,208,.4);
+      margin-top: .25rem;
+    }
+    .bk-widget-badge {
+      background: var(--terra);
+      color: var(--sand);
+      font-size: .56rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: .35rem .8rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .bk-widget-body { padding: 1rem; }
+
+    .bk-contact-strip {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--cream);
+      border: 1px solid rgba(139,69,19,.1);
+      text-align: center;
+    }
+    .bk-contact-strip p {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      color: rgba(44,18,8,.4);
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .bk-contact-strip a {
+      color: var(--terra);
+      text-decoration: none;
+      font-size: .8rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .bk-contact-strip a:hover { color: var(--ember); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .bk-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 160px;
+      }
+      .bk-gallery-item:first-child { grid-row: 1 / 3; }
+      .bk-gallery-item:nth-child(4),
+      .bk-gallery-item:nth-child(5) { display: none; }
+    }
+    @media (max-width: 680px) {
+      .bk-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 140px;
+      }
+      .bk-main {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 2.5rem 1.2rem 4rem;
+      }
+      .bk-right { position: static; }
+      .lb-prev { left: .5rem; }
+      .lb-next { right: .5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
+<div class="preloader gone" id="preloader" style="display:none"></div>
+
+<!-- MENÚ MÓVIL -->
+<div class="mob-nav" id="mobNav">
+  <a href="index.html#tours" onclick="closeMob()">The Tour</a>
+  <a href="index.html#about" onclick="closeMob()">The Guide</a>
+  <a href="index.html#ciudad" onclick="closeMob()">The City</a>
+  <a href="booking.html" onclick="closeMob()">Book</a>
+  <span class="mob-sub">We Are Alicante</span>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/images/logo.svg" alt="We Are Alicante" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#tours">The Tour</a></li>
+    <li><a href="index.html#about">The Guide</a></li>
+    <li><a href="index.html#ciudad">The City</a></li>
+    <li><a href="booking.html" class="nav-cta">Book</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ════════════════════════════════════
+     LIGHTBOX
+════════════════════════════════════ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <button class="lb-close" id="lb-close" aria-label="Close gallery">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+  </button>
+  <div class="lb-img-wrap">
+    <img class="lb-img" id="lb-img" src="" alt="">
+  </div>
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"/></svg>
+  </button>
+  <p class="lb-caption" id="lb-caption"></p>
+  <p class="lb-counter" id="lb-counter">01 / 05</p>
+</div>
+
+<div class="bk-page">
+
+  <!-- ════════════════════════════════════
+       GALLERY — numbered mosaic
+  ════════════════════════════════════ -->
+  <div class="bk-gallery">
+
+    <div class="bk-gallery-item" data-index="0">
+      <img src="assets/images/foto1.webp" alt="Alicante Walking Tour">
+      <div class="bk-gallery-overlay"></div>
+      <span class="bk-gallery-num">01</span>
+      <span class="bk-gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+    </div>
+
+    <div class="bk-gallery-item" data-index="1">
+      <img src="assets/images/foto2.webp" alt="Alicante Walking Tour">
+      <div class="bk-gallery-overlay"></div>
+      <span class="bk-gallery-num">02</span>
+      <span class="bk-gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+    </div>
+
+    <div class="bk-gallery-item" data-index="2">
+      <img src="assets/images/foto3.webp" alt="Alicante Walking Tour">
+      <div class="bk-gallery-overlay"></div>
+      <span class="bk-gallery-num">03</span>
+      <span class="bk-gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+    </div>
+
+    <div class="bk-gallery-item" data-index="3">
+      <img src="assets/images/foto4.webp" alt="Alicante Walking Tour">
+      <div class="bk-gallery-overlay"></div>
+      <span class="bk-gallery-num">04</span>
+      <span class="bk-gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+    </div>
+
+    <div class="bk-gallery-item" data-index="4">
+      <img src="assets/images/foto5.webp" alt="Alicante Walking Tour">
+      <div class="bk-gallery-overlay"></div>
+      <span class="bk-gallery-num">05</span>
+      <span class="bk-gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════
+       TWO-COLUMN LAYOUT
+  ════════════════════════════════════ -->
+  <div class="bk-main">
+
+    <!-- LEFT -->
+    <div class="bk-left">
+
+      <p class="bk-label">Walking Tour · Alicante, Spain</p>
+
+      <h1 class="bk-title">
+        Alicante:<br>Where Muslim<br><em>&amp; Christian History Meet</em>
+      </h1>
+
+      <div class="bk-badges">
+        <div class="bk-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
+          Duration <strong>2h 30min</strong>
+        </div>
+        <div class="bk-badge">
+          <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+          Language <strong>English</strong>
+        </div>
+        <div class="bk-badge">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Groups <strong>Small</strong>
+        </div>
+        <div class="bk-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Start <strong>Auditorio la Concha</strong>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="bk-tabs-nav" role="tablist">
+        <button class="bk-tab active" data-tab="tab-tour"     role="tab" aria-selected="true">The Tour</button>
+        <button class="bk-tab"        data-tab="tab-included" role="tab" aria-selected="false">Included</button>
+        <button class="bk-tab"        data-tab="tab-route"    role="tab" aria-selected="false">The Route</button>
+        <button class="bk-tab"        data-tab="tab-meet"     role="tab" aria-selected="false">Meet Here</button>
+      </div>
+
+      <div class="bk-tab-panel active" id="tab-tour" role="tabpanel">
+        <p class="bk-desc">
+          Discover the history and <strong>hidden stories of Alicante</strong> beyond what any guidebook will ever show you. Starting at the iconic Explanada de España, we walk through the most authentic corners of the city — the streets that whisper centuries of history, and the places only a local knows.
+        </p>
+        <p class="bk-desc">
+          In just 2 hours and 30 minutes, you'll experience <strong>over 1,000 years of Muslim and Christian history</strong>, the city's vibrant gastronomy, and the soul of a neighbourhood that time forgot. All of this with a local guide who lives Alicante every single day.
+        </p>
+      </div>
+
+      <div class="bk-tab-panel" id="tab-included" role="tabpanel">
+        <ul class="bk-included">
+          <li>Professional guide — Isaac Rodriguez</li>
+          <li>9 stops across the city</li>
+          <li>Muslim &amp; Christian history narration</li>
+          <li>Small group experience — limited spots</li>
+          <li>Personalised pace — we adapt to your group</li>
+        </ul>
+      </div>
+
+      <div class="bk-tab-panel" id="tab-route" role="tabpanel">
+        <ul class="bk-included">
+          <li>Auditorio la Concha — starting point</li>
+          <li>Explanada de España</li>
+          <li>El Carrer dels Bolets</li>
+          <li>Co-cathedral of St Nicholas of Bari</li>
+          <li>Alicante City Hall</li>
+          <li>Basílica of Santa Maria</li>
+          <li>Torre de la Pólvora</li>
+          <li>Chapel of Saint Roch</li>
+          <li>Casco Antiguo – Santa Cruz</li>
+          <li>Mercado Central de Alicante — finish</li>
+        </ul>
+      </div>
+
+      <div class="bk-tab-panel" id="tab-meet" role="tabpanel">
+        <div class="bk-meeting">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <div>
+            <p class="bk-meeting-label">Meeting point</p>
+            <p class="bk-meeting-place">Auditorio la Concha, Alicante</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: BOOKING WIDGET -->
+    <div class="bk-right">
+      <div class="bk-widget-card">
+        <div class="bk-widget-header">
+          <div>
+            <p class="bk-widget-header-title">Reserve Your Spot</p>
+            <p class="bk-widget-header-sub">Instant confirmation · Limited availability</p>
+          </div>
+          <span class="bk-widget-badge">Book Now</span>
+        </div>
+        <div class="bk-widget-body">
+          <div class="bokunWidget" data-src="https://widgets.bokun.io/online-sales/a4609da5-fa70-4754-aa87-57c1fb88ac77/experience-calendar/1241620"></div>
+          <noscript>Please enable javascript in your browser to book</noscript>
+        </div>
+      </div>
+      <div class="bk-contact-strip">
+        <p>Questions or private experiences?</p>
+        <a href="mailto:info@wearealicante.com">info@wearealicante.com</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="footer-logo-link">
+      <img src="assets/images/logo.svg" alt="We Are Alicante" class="footer-logo-img">
+    </a>
+    <div class="footer-socials">
+      <a href="https://instagram.com" target="_blank" class="footer-social-btn" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="mailto:info@wearealicante.com" class="footer-social-btn" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer-mid">
+    <div class="footer-nav">
+      <a href="index.html#tours">The Tour</a>
+      <a href="index.html#about">The Guide</a>
+      <a href="index.html#ciudad">The City</a>
+      <a href="index.html#contacto">Contact</a>
+      <a href="booking.html">Book</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 We Are Alicante · Isaac Rodriguez. All rights reserved.</p>
+    <p class="footer-copy">Official Guide · Alicante, Spain</p>
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=a4609da5-fa70-4754-aa87-57c1fb88ac77" async></script>
+
+<script>
+/* ── TABS ── */
+document.querySelectorAll('.bk-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.bk-tab').forEach(function(t) {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('.bk-tab-panel').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ── LIGHTBOX ── */
+var lbData = [
+  { src: 'assets/images/foto1.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto2.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto3.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto4.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto5.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto5_1.webp',  caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto6.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto7.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto8.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto9.webp',    caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto9_1.webp',  caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto10.webp',   caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto10_1.webp', caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto10_2.webp', caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto10_3.webp', caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto10_4.webp', caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto11.webp',   caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto11_1.webp', caption: 'Alicante Walking Tour' },
+  { src: 'assets/images/foto11_2.webp', caption: 'Alicante Walking Tour' }
+];
+
+var lb        = document.getElementById('lb');
+var lbImg     = document.getElementById('lb-img');
+var lbCaption = document.getElementById('lb-caption');
+var lbCounter = document.getElementById('lb-counter');
+var current   = 0;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function showSlide(i) {
+  lbImg.classList.add('switching');
+  setTimeout(function() {
+    lbImg.src       = lbData[i].src;
+    lbImg.alt       = lbData[i].caption;
+    lbCaption.textContent = lbData[i].caption;
+    lbCounter.textContent = pad(i + 1) + ' / ' + pad(lbData.length);
+    lbImg.classList.remove('switching');
+  }, 160);
+}
+
+function openLb(i) {
+  current = i;
+  lbImg.src       = lbData[i].src;
+  lbImg.alt       = lbData[i].caption;
+  lbCaption.textContent = lbData[i].caption;
+  lbCounter.textContent = pad(i + 1) + ' / ' + pad(lbData.length);
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.bk-gallery-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    openLb(parseInt(item.dataset.index));
+  });
+});
+
+document.getElementById('lb-close').addEventListener('click', closeLb);
+
+lb.addEventListener('click', function(e) {
+  if (e.target === lb) closeLb();
+});
+
+document.getElementById('lb-prev').addEventListener('click', function() {
+  current = (current - 1 + lbData.length) % lbData.length;
+  showSlide(current);
+});
+
+document.getElementById('lb-next').addEventListener('click', function() {
+  current = (current + 1) % lbData.length;
+  showSlide(current);
+});
+
+document.addEventListener('keydown', function(e) {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape')      { closeLb(); }
+  if (e.key === 'ArrowLeft')   { current = (current - 1 + lbData.length) % lbData.length; showSlide(current); }
+  if (e.key === 'ArrowRight')  { current = (current + 1) % lbData.length; showSlide(current); }
+});
+</script>
+
+<script src="src/js/main.js"></script>
+</body>
+</html>
