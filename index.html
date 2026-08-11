@@ -6,7 +6,7 @@
 
   <!-- ═══ SEO PRIMARIO ═══ -->
   <title>We Are Alicante – Walking Tour in Alicante | Isaac Rodriguez, Local Tour Guide</title>
-  <meta name="description" content="Book a walking tour in Alicante with Isaac Rodriguez. Small groups, confirmation in under 2 hours. Real history, local gastronomy, and the hidden corners no guidebook will show you.">
+  <meta name="description" content="Book a walking tour in Alicante with Isaac Rodriguez. Small groups, instant confirmation. Real history, local gastronomy, and the hidden corners no guidebook will show you.">
   <meta name="keywords" content="walking tour Alicante, guided tour Alicante, Alicante tour guide, Isaac Rodriguez guide, We Are Alicante, things to do in Alicante, Alicante sightseeing, Santa Barbara Castle, Explanada Alicante, Alicante old town">
   <meta name="author" content="Isaac Rodriguez – We Are Alicante">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -28,7 +28,7 @@
   <meta property="og:site_name"   content="We Are Alicante">
   <meta property="og:locale"      content="en_US">
   <meta property="og:title"       content="We Are Alicante – Walking Tour in Alicante with Isaac Rodriguez">
-  <meta property="og:description" content="The tour that shows you the real Alicante. Small groups, limited spots and confirmation in under 2 hours. History, gastronomy and the authentic corners of the city.">
+  <meta property="og:description" content="The tour that shows you the real Alicante. Small groups, limited spots and instant confirmation. History, gastronomy and the authentic corners of the city.">
   <meta property="og:image"       content="https://www.wearealicante.com/assets/images/og-image.png">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
@@ -192,6 +192,238 @@
 
   <!-- ═══ ESTILOS ═══ -->
   <link rel="stylesheet" href="src/css/styles.css">
+  <style>
+    /* ════ TESTIMONIALS ════ */
+    .tm-section {
+      background: var(--deep);
+      padding: 6rem 0 3rem;
+      overflow: hidden;
+    }
+    .tm-head {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0 2rem;
+    }
+    .tm-eyebrow {
+      font-size: .58rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: var(--terra);
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .tm-eyebrow::before, .tm-eyebrow::after {
+      content: ''; width: 36px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--terra));
+    }
+    .tm-eyebrow::after { transform: scaleX(-1); }
+    .tm-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      color: var(--sand);
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+    }
+    .tm-h2 em { font-style: italic; color: var(--terra); }
+
+    .tm-stage-wrap {
+      position: relative;
+      height: 580px;
+    }
+    .tm-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    .tm-stage.dragging { cursor: grabbing; }
+    .tm-card.no-tr { transition: none !important; }
+    .tm-card {
+      position: absolute;
+      left: 50%; top: 50%;
+      clip-path: polygon(0 0, calc(100% - 46px) 0, 100% 46px, 100% 100%, 0 100%);
+      padding: 2.2rem 1.8rem 1.6rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: transform .52s cubic-bezier(.25,.46,.45,.94), opacity .42s ease, background-color .44s ease, color .44s ease, box-shadow .44s ease;
+      background: var(--cream);
+      border: 2px solid rgba(139,69,19,.08);
+      overflow: hidden;
+      user-select: none;
+      box-sizing: border-box;
+    }
+    /* Comilla decorativa como backdrop — fuera del flujo flex */
+    .tm-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      line-height: 1;
+      color: var(--terra);
+      opacity: .08;
+      position: absolute;
+      top: .3rem; left: 1rem;
+      pointer-events: none;
+    }
+    .tm-card--active::before { opacity: .28; color: rgba(240,224,208,.85); }
+    /* Línea diagonal del corner cut */
+    .tm-card::after {
+      content: '';
+      position: absolute;
+      right: -2px; top: 30px;
+      width: 68px; height: 1px;
+      background: rgba(139,69,19,.15);
+      transform-origin: right center;
+      transform: rotate(45deg);
+    }
+    .tm-card--active {
+      background: var(--terra);
+      border-color: transparent;
+      box-shadow:
+        inset 0 3px 0 rgba(200,146,42,.45),
+        0 12px 0 4px rgba(10,4,2,.32);
+      cursor: default;
+    }
+    .tm-card--active::after { background: rgba(240,224,208,.16); }
+
+    .tm-stars {
+      display: block;
+      font-size: .86rem;
+      color: #E4A91A;
+      letter-spacing: .15em;
+      margin-bottom: .85rem;
+      flex-shrink: 0;
+    }
+    .tm-card--active .tm-stars { color: rgba(240,224,208,.48); }
+
+    .tm-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(.88rem, 1.05vw, 1rem);
+      line-height: 1.76;
+      color: rgba(44,18,8,.76);
+      margin: 0 0 auto;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .tm-card--active .tm-quote { color: rgba(240,224,208,.94); }
+
+    .tm-footer {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin-top: 1rem;
+      padding-top: .8rem;
+      border-top: 1px solid rgba(139,69,19,.06);
+      flex-shrink: 0;
+    }
+    .tm-card--active .tm-footer { border-top-color: rgba(240,224,208,.1); }
+
+    .tm-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(201,78,42,.1);
+      color: var(--terra);
+      font-family: 'Playfair Display', serif;
+      font-size: .74rem;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tm-card--active .tm-avatar {
+      background: rgba(240,224,208,.12);
+      color: rgba(240,224,208,.9);
+    }
+
+    .tm-info { flex: 1; min-width: 0; }
+    .tm-name {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      color: rgba(44,18,8,.82);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tm-card--active .tm-name { color: rgba(240,224,208,.93); }
+    .tm-country {
+      display: block;
+      font-size: .55rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(44,18,8,.38);
+      margin-top: 2px;
+    }
+    .tm-card--active .tm-country { color: rgba(240,224,208,.42); }
+    .tm-icon { flex-shrink: 0; line-height: 0; display: flex; align-items: center; }
+
+    .tm-controls {
+      position: absolute;
+      bottom: 1.4rem;
+      left: 50%; transform: translateX(-50%);
+      display: flex; gap: .55rem;
+      z-index: 20;
+    }
+    .tm-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(240,224,208,.07);
+      border: 1px solid rgba(240,224,208,.18);
+      color: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .22s, border-color .22s, transform .15s;
+      clip-path: none;
+    }
+    .tm-btn:hover {
+      background: rgba(240,224,208,.18);
+      border-color: rgba(240,224,208,.38);
+      transform: scale(1.1);
+    }
+    .tm-btn svg { width: 18px; height: 18px; }
+
+    .tm-source-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.2rem;
+      padding: .5rem 2rem 2.5rem;
+      flex-wrap: wrap;
+    }
+    .tm-source-dot {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(240,224,208,.22);
+    }
+    .tm-source-dot::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--dot-c);
+      opacity: .65;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .tm-stage-wrap { height: 460px; }
+      .tm-section { padding: 4rem 0 2.5rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -250,7 +482,7 @@
         <span class="ln"><span><em>Alicante</em></span></span>
       </h1>
       <p class="hero-sub">Discover its true face.</p>
-      <a href="https://linktr.ee/wearealicante"
+      <a href="booking.html"
          target="_blank" class="btn-hero">
         Book Tour
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
@@ -302,7 +534,7 @@
     </div>
     <div class="tour-meta-body">
       <p class="tour-intro-p reveal r2">Two and a half hours through the corners no guidebook will ever show you. Discover Alicante's history, gastronomy, and hidden stories with a local guide who lives the city every day.</p>
-      <a href="https://linktr.ee/wearealicante" target="_blank" class="btn-terra reveal r3">
+      <a href="booking.html" target="_blank" class="btn-terra reveal r3">
         Book Now
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       </a>
@@ -313,7 +545,11 @@
   <div class="stops-strip">
 
     <div class="stop-card reveal">
-      <img src="assets/images/img_explanada2.webp" alt="Explanada de España, Alicante" loading="lazy">
+      <img src="assets/images/img_explanada2.webp"
+     srcset="assets/images/img_explanada2-sm.webp 900w, assets/images/img_explanada2.webp 1400w"
+     sizes="(max-width: 768px) 100vw, 28vw"
+     width="900" height="1125"
+     alt="Explanada de España, Alicante" loading="lazy" decoding="async">
       <div class="stop-overlay">
         <span class="stop-num">01</span>
         <div class="stop-name-wrap">
@@ -329,7 +565,11 @@
     </div>
 
     <div class="stop-card reveal r1">
-      <img src="assets/images/img_basilica_santa_maria.webp" alt="Basilica of Santa Maria, Alicante" loading="lazy">
+      <img src="assets/images/img_basilica_santa_maria.webp"
+     srcset="assets/images/img_basilica_santa_maria-sm.webp 900w, assets/images/img_basilica_santa_maria.webp 2816w"
+     sizes="(max-width: 768px) 100vw, 28vw"
+     width="900" height="675"
+     alt="Basilica of Santa Maria, Alicante" loading="lazy" decoding="async">
       <div class="stop-overlay">
         <span class="stop-num">02</span>
         <div class="stop-name-wrap">
@@ -345,7 +585,11 @@
     </div>
 
     <div class="stop-card reveal r2">
-      <img src="assets/images/img_barrio_santa_cruz.webp" alt="Santa Cruz Quarter, Alicante" loading="lazy">
+      <img src="assets/images/img_barrio_santa_cruz.webp"
+     srcset="assets/images/img_barrio_santa_cruz-sm.webp 800w, assets/images/img_barrio_santa_cruz.webp 2624w"
+     sizes="(max-width: 768px) 100vw, 28vw"
+     width="800" height="1200"
+     alt="Santa Cruz Quarter, Alicante" loading="lazy" decoding="async">
       <div class="stop-overlay">
         <span class="stop-num">03</span>
         <div class="stop-name-wrap">
@@ -361,7 +605,11 @@
     </div>
 
     <div class="stop-card reveal r3">
-      <img src="assets/images/img_mercado_central.webp" alt="Central Market of Alicante" loading="lazy">
+      <img src="assets/images/img_mercado_central.webp"
+     srcset="assets/images/img_mercado_central-sm.webp 800w, assets/images/img_mercado_central.webp 2160w"
+     sizes="(max-width: 768px) 100vw, 28vw"
+     width="800" height="1422"
+     alt="Central Market of Alicante" loading="lazy" decoding="async">
       <div class="stop-overlay">
         <span class="stop-num">04</span>
         <div class="stop-name-wrap">
@@ -418,7 +666,7 @@
           src="assets/images/isaac.webp"
           alt="Isaac Rodriguez — Tour Guide Alicante"
           class="about-photo"
-          fetchpriority="high"
+          loading="lazy" decoding="async"
         >
         <span class="about-photo-badge">Isaac Rodriguez · Tour Guide</span>
       </div>
@@ -446,33 +694,77 @@
   </div>
   <div class="mosaic">
     <div class="m-item reveal">
-      <img src="assets/images/img_playa_castillo.webp" alt="Postiguet Beach with Santa Barbara Castle" loading="lazy">
+      <img src="assets/images/img_playa_castillo.webp" alt="Postiguet Beach with Santa Barbara Castle" loading="lazy" decoding="async">
       <div class="m-label"><strong>Postiguet Beach</strong><span>Golden sands beneath the castle</span></div>
     </div>
     <div class="m-item reveal r1">
-      <img src="assets/images/img_explanada1.webp" alt="Explanada de España, Alicante" loading="lazy">
+      <img src="assets/images/img_explanada1.webp"
+     srcset="assets/images/img_explanada1-sm.webp 900w, assets/images/img_explanada1.webp 1400w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Explanada de España, Alicante" loading="lazy" decoding="async">
       <div class="m-label"><strong>Explanada</strong><span>The city's most iconic promenade</span></div>
     </div>
     <div class="m-item reveal r2">
-      <img src="assets/images/img_ciudad_atardecer.webp" alt="Alicante at sunset from the castle" loading="lazy">
+      <img src="assets/images/img_ciudad_atardecer.webp" alt="Alicante at sunset from the castle" loading="lazy" decoding="async">
       <div class="m-label"><strong>Alicante at Sunset</strong><span>When the city turns to gold</span></div>
     </div>
     <div class="m-item reveal r1">
-      <img src="assets/images/img_castillo_sunset.webp" alt="Santa Barbara Castle at sunset" loading="lazy">
+      <img src="assets/images/img_castillo_sunset.webp"
+     srcset="assets/images/img_castillo_sunset-sm.webp 960w, assets/images/img_castillo_sunset.webp 1920w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Santa Barbara Castle at sunset" loading="lazy" decoding="async">
       <div class="m-label"><strong>Santa Barbara Castle</strong><span>The guardian of Alicante</span></div>
     </div>
     <div class="m-item reveal r2">
-      <img src="assets/images/img_explanada2.webp" alt="Bullring of Alicante" loading="lazy">
+      <img src="assets/images/img_explanada2.webp"
+     srcset="assets/images/img_explanada2-sm.webp 900w, assets/images/img_explanada2.webp 1400w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Bullring of Alicante" loading="lazy" decoding="async">
       <div class="m-label"><strong>Bullring</strong><span>One of Spain's oldest arenas</span></div>
     </div>
     <div class="m-item reveal r1">
-      <img src="assets/images/img_mercado_central.webp" alt="Central Market of Alicante" loading="lazy">
+      <img src="assets/images/img_mercado_central.webp"
+     srcset="assets/images/img_mercado_central-sm.webp 800w, assets/images/img_mercado_central.webp 2160w"
+     sizes="(max-width: 768px) 100vw, 28vw"
+     width="800" height="1422"
+     alt="Central Market of Alicante" loading="lazy" decoding="async">
       <div class="m-label"><strong>Central Market</strong><span>Mediterranean colors and flavors</span></div>
     </div>
     <div class="m-item reveal r2">
-      <img src="assets/images/img_barrio_santa_cruz.webp" alt="Santa Cruz Quarter" loading="lazy">
+      <img src="assets/images/img_barrio_santa_cruz.webp"
+     srcset="assets/images/img_barrio_santa_cruz-sm.webp 800w, assets/images/img_barrio_santa_cruz.webp 2624w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Santa Cruz Quarter" loading="lazy" decoding="async">
       <div class="m-label"><strong>Santa Cruz Quarter</strong><span>Streets steeped in history</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════ -->
+<section id="reviews" class="tm-section">
+  <div class="tm-head">
+    <p class="tm-eyebrow reveal">Reviews</p>
+    <h2 class="tm-h2 reveal r1">What Travelers <em>Say</em></h2>
+  </div>
+  <div class="tm-stage-wrap">
+    <div class="tm-stage" id="tmStage" role="region" aria-label="Traveler reviews"></div>
+    <div class="tm-controls">
+      <button class="tm-btn" id="tmPrev" aria-label="Previous review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <button class="tm-btn" id="tmNext" aria-label="Next review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="tm-source-row">
+    <span class="tm-source-dot" style="--dot-c:#FF5A5F">Airbnb</span>
+    <span class="tm-source-dot" style="--dot-c:#FF8000">GetYourGuide</span>
+    <span class="tm-source-dot" style="--dot-c:#1A6B76">Viator</span>
+    <span class="tm-source-dot" style="--dot-c:#4285F4">Google</span>
+    <span class="tm-source-dot" style="--dot-c:#00A680">TripAdvisor</span>
   </div>
 </section>
 
@@ -484,8 +776,7 @@
     <p class="tag reveal" style="color: var(--terra)">Bookings</p>
     <h2 class="contacto-h2 reveal r1">Book Your Spot <em>Now</em></h2>
     <p class="contacto-p reveal r2">No forms, no waiting. Just click the link below, choose your date and group size, and receive instant confirmation.</p>
-    <a href="https://linktr.ee/wearealicante"
-       target="_blank" class="wa-big reveal r3">
+    <a href="booking.html" class="wa-big reveal r3" target="_blank">
       <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       Book Here
     </a>
@@ -532,17 +823,9 @@
     <p class="cta-kicker reveal">Limited Availability</p>
     <h2 class="cta-h2 reveal r1">Your Spot <em>Is Waiting</em></h2>
     <p class="cta-sub reveal r2">Get in touch if you have any questions, special requests, or would like a private experience. I'll be happy to help.</p>
-    <div class="reveal r3" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem;">
-      <a href="https://airbnb.es/x/wearealicantetour1" target="_blank" class="btn-wa-lg">
-        Book on Airbnb
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-      </a>
-      <a href="https://www.getyourguide.com/alicante-l414/alicante-walking-tour-where-muslim-christian-history-meet-t1336007/?preview=HZ7NTZ3TU2TRT5NG4X2ENKP8DYC3LSF4" target="_blank" class="btn-wa-lg">
-        Book on GetYourGuide
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-      </a>
-      <a href="https://www.viator.com/tours/Alicante/Alicante-Where-Muslim-and-Christian-History-Meet/d23519-5664642P1" target="_blank" class="btn-wa-lg">
-        Book on Viator
+    <div class="reveal r3" style="display:flex;justify-content:center;margin-top:1rem;">
+      <a href="booking.html" class="btn-wa-lg" target="_blank">
+        Book Now
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       </a>
     </div>
@@ -576,7 +859,7 @@
       <a href="#about">The Guide</a>
       <a href="#ciudad">The City</a>
       <a href="#contacto">Contact</a>
-      <a href="https://linktr.ee/wearealicante" target="_blank">Book</a>
+      <a href="booking.html" target="_blank">Book</a>
     </div>
   </div>
 
@@ -587,6 +870,253 @@
 </footer>
 
 <!-- JavaScript -->
+<script>
+(function () {
+  var CARD_LG = 390, CARD_SM = 265;
+  var SNAP = 72;
+
+  var testimonials = [
+    {
+      text: "Absolutely incredible experience. Isaac brings the history of Alicante to life in a way no guidebook ever could. We left feeling we truly knew the city.",
+      author: "Sarah & James — United Kingdom",
+      platform: "Airbnb", color: "#FF5A5F", url: "#"
+    },
+    {
+      text: "Best tour we did on our entire trip to Spain. Small group, personal attention, and stories you won't find anywhere else. A true professional.",
+      author: "Marco T. — Italy",
+      platform: "GetYourGuide", color: "#FF8000", url: "#"
+    },
+    {
+      text: "We had been to Alicante twice before and never understood its soul until this tour. The Muslim-Christian history angle is unique and fascinating.",
+      author: "Emily R. — United States",
+      platform: "Viator", color: "#1A6B76", url: "#"
+    },
+    {
+      text: "Isaac is the kind of guide who makes history feel personal. Two and a half hours flew by. We immediately recommended the tour to friends visiting.",
+      author: "Anne-Sophie M. — France",
+      platform: "Google", color: "#4285F4", url: "#"
+    },
+    {
+      text: "A hidden gem of a tour. The Santa Cruz Quarter was magical and the story of the Basilica left me speechless. Worth every euro.",
+      author: "Thomas K. — Germany",
+      platform: "TripAdvisor", color: "#00A680", url: "#"
+    },
+    {
+      text: "If you are visiting Alicante, do not miss this tour. Isaac knows every stone, every legend, every corner. It was the highlight of our holiday.",
+      author: "Lucia V. — Netherlands",
+      platform: "Airbnb", color: "#FF5A5F", url: "#"
+    }
+  ];
+
+  var N = testimonials.length;
+  var CENTER = Math.floor(N / 2);
+  var active = 0;
+  var busy = false;
+  var cards = [];
+  var drag = { active: false, startX: 0, curX: 0, significant: false };
+
+  function mod(n, m) { return ((n % m) + m) % m; }
+  function posFor(i)  { return i - CENTER; }
+  function opFor(pos) {
+    var a = Math.abs(pos);
+    return a === 0 ? 1 : a === 1 ? 0.82 : a === 2 ? 0.5 : 0;
+  }
+  function zFor(pos) {
+    var a = Math.abs(pos);
+    return a === 0 ? 10 : a === 1 ? 5 : a === 2 ? 2 : 0;
+  }
+
+  function buildTransform(pos, xOff, cw, dragDx) {
+    var isC = pos === 0;
+    var yOff = isC ? -65 : (pos % 2 !== 0 ? 15 : -15);
+    var rot  = isC ? 0   : (pos % 2 !== 0 ? 2.5 : -2.5);
+    var x = (cw / 1.5) * pos + xOff;
+    var extraRot = dragDx ? (dragDx / 18) * (isC ? 1 : 0.3) : 0;
+    return 'translate(-50%,-50%) translateX(' + x + 'px) translateY(' + yOff + 'px) rotate(' + (rot + extraRot) + 'deg)';
+  }
+
+  var PLATFORM_ICONS = {
+    'Google':
+      '<svg viewBox="0 0 24 24" width="22" height="22" aria-label="Google"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>',
+    'Airbnb':
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-label="Airbnb"><path fill="#FF5A5F" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>',
+    'TripAdvisor':
+      '<svg viewBox="0 0 34 17" width="30" height="15" aria-label="TripAdvisor"><circle cx="8.5" cy="8.5" r="8" fill="#00A680"/><circle cx="25.5" cy="8.5" r="8" fill="#00A680"/><circle cx="8.5" cy="8.5" r="3.6" fill="white"/><circle cx="25.5" cy="8.5" r="3.6" fill="white"/><circle cx="8.5" cy="8.5" r="2.1" fill="#00A680"/><circle cx="25.5" cy="8.5" r="2.1" fill="#00A680"/></svg>',
+    'GetYourGuide':
+      '<svg viewBox="0 0 24 24" width="22" height="22" aria-label="GetYourGuide"><rect width="24" height="24" rx="5" fill="#FF5C00"/><path fill="white" d="M16 11.5h-3.5V10H16V8.5c0-2.2-1.8-4-4-4s-4 1.8-4 4v3c0 2.2 1.8 4 4 4a4 4 0 0 0 3.9-3.2H14.4A2.5 2.5 0 0 1 12 14c-1.38 0-2.5-1.12-2.5-2.5v-3c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v1h-1.5v1.5H16v-1.5z"/></svg>',
+    'Viator':
+      '<svg viewBox="0 0 24 24" width="22" height="22" aria-label="Viator"><circle cx="12" cy="12" r="12" fill="#1A6B76"/><path fill="white" d="M8.5 7.5h1.8l1.7 5.8 1.7-5.8H15.5L12.8 16h-1.6z"/></svg>'
+  };
+
+  function cardHTML(t) {
+    var parts = t.author.split('\u2014');
+    var name    = parts[0].trim();
+    var country = parts.length > 1 ? parts[1].trim() : '';
+    var words   = name.replace(/&/g, ' ').split(/\s+/).filter(Boolean);
+    var initials = words.slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
+    var icon = PLATFORM_ICONS[t.platform] || '';
+    return '<div class="tm-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<blockquote class="tm-quote">' + t.text + '</blockquote>' +
+      '<div class="tm-footer">' +
+        '<div class="tm-avatar">' + initials + '</div>' +
+        '<div class="tm-info">' +
+          '<span class="tm-name">' + name + '</span>' +
+          '<span class="tm-country">' + country + '</span>' +
+        '</div>' +
+        '<div class="tm-icon">' + icon + '</div>' +
+      '</div>';
+  }
+
+  function applyCardPos(el, idx, cw) {
+    var pos = posFor(idx);
+    el.style.transform = buildTransform(pos, 0, cw, 0);
+    el.style.opacity   = opFor(pos);
+    el.style.zIndex    = zFor(pos);
+    el.setAttribute('data-pos', pos);
+    el.classList.toggle('tm-card--active', pos === 0);
+  }
+
+  function applyDragTransforms(dx) {
+    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+    cards.forEach(function (el, i) {
+      el.style.transform = buildTransform(posFor(i), dx, cw, dx);
+    });
+  }
+
+  function move(steps) {
+    if (busy) return;
+    busy = true;
+
+    var stage = document.getElementById('tmStage');
+    if (!stage) { busy = false; return; }
+    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+
+    if (steps > 0) {
+      var recycled = cards.shift();
+      active = mod(active + 1, N);
+      recycled.innerHTML = cardHTML(testimonials[mod(active + (N - 1 - CENTER), N)]);
+      recycled.style.transition = 'none';
+      recycled.style.transform  = buildTransform(N - 1 - CENTER, 0, cw, 0);
+      recycled.style.opacity    = '0';
+      recycled.style.zIndex     = zFor(N - 1 - CENTER);
+      recycled.setAttribute('data-pos', N - 1 - CENTER);
+      recycled.classList.remove('tm-card--active');
+      cards.push(recycled);
+      stage.appendChild(recycled);
+    } else {
+      var recycled = cards.pop();
+      active = mod(active - 1, N);
+      recycled.innerHTML = cardHTML(testimonials[mod(active - CENTER, N)]);
+      recycled.style.transition = 'none';
+      recycled.style.opacity    = '0';
+      recycled.style.transform  = buildTransform(-CENTER, 0, cw, 0);
+      recycled.style.zIndex     = zFor(-CENTER);
+      recycled.setAttribute('data-pos', -CENTER);
+      recycled.classList.remove('tm-card--active');
+      cards.unshift(recycled);
+      stage.insertBefore(recycled, stage.firstChild);
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        cards.forEach(function (el, i) {
+          el.style.transition = '';
+          applyCardPos(el, i, cw);
+        });
+        setTimeout(function () { busy = false; }, 560);
+      });
+    });
+  }
+
+  function dragStart(clientX) {
+    if (busy) return;
+    drag.active      = true;
+    drag.startX      = clientX;
+    drag.curX        = clientX;
+    drag.significant = false;
+    var stage = document.getElementById('tmStage');
+    if (stage) stage.classList.add('dragging');
+  }
+
+  function dragMove(clientX) {
+    if (!drag.active) return;
+    drag.curX = clientX;
+    var dx = drag.curX - drag.startX;
+    if (Math.abs(dx) > 6) drag.significant = true;
+    applyDragTransforms(dx);
+  }
+
+  function dragEnd() {
+    if (!drag.active) return;
+    drag.active = false;
+    var stage = document.getElementById('tmStage');
+    if (stage) stage.classList.remove('dragging');
+    var dx = drag.curX - drag.startX;
+    if (Math.abs(dx) >= SNAP) {
+      move(dx < 0 ? 1 : -1);
+    } else if (drag.significant) {
+      applyDragTransforms(0);
+    }
+  }
+
+  function init() {
+    var stage = document.getElementById('tmStage');
+    if (!stage) return;
+    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+
+    for (var i = 0; i < N; i++) {
+      var pos = posFor(i);
+      var t   = testimonials[mod(active + i - CENTER, N)];
+      var el  = document.createElement('div');
+      el.className = 'tm-card' + (pos === 0 ? ' tm-card--active' : '');
+      el.setAttribute('data-pos', pos);
+      el.style.cssText =
+        'width:' + cw + 'px;height:' + cw + 'px;' +
+        'transform:' + buildTransform(pos, 0, cw, 0) + ';' +
+        'z-index:' + zFor(pos) + ';opacity:' + opFor(pos) + ';';
+      el.innerHTML = cardHTML(t);
+      stage.appendChild(el);
+      cards.push(el);
+    }
+
+    stage.addEventListener('click', function (e) {
+      if (busy || drag.significant) return;
+      var target = e.target.closest ? e.target.closest('.tm-card') : null;
+      if (!target) return;
+      var pos = parseInt(target.getAttribute('data-pos'), 10);
+      if (pos !== 0) move(pos > 0 ? 1 : -1);
+    });
+
+    var prev = document.getElementById('tmPrev');
+    var next = document.getElementById('tmNext');
+    if (prev) prev.addEventListener('click', function () { move(-1); });
+    if (next) next.addEventListener('click', function () { move(1); });
+
+    stage.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
+    window.addEventListener('mousemove', function (e) { if (drag.active) dragMove(e.clientX); });
+    window.addEventListener('mouseup',   function ()  { if (drag.active) dragEnd(); });
+    stage.addEventListener('touchstart', function (e) { dragStart(e.touches[0].clientX); }, { passive: true });
+    stage.addEventListener('touchmove',  function (e) { if (drag.active) dragMove(e.touches[0].clientX); }, { passive: true });
+    stage.addEventListener('touchend',   function ()  { if (drag.active) dragEnd(); });
+
+    window.addEventListener('resize', function () {
+      var cw2 = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+      cards.forEach(function (el, i) {
+        el.style.transition = 'none';
+        el.style.width  = cw2 + 'px';
+        el.style.height = cw2 + 'px';
+        el.style.transform = buildTransform(posFor(i), 0, cw2, 0);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script src="src/js/main.js"></script>
 
 </body>
