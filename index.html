@@ -438,11 +438,6 @@
   <p class="pl-em">Isaac Rodriguez · Tour Guide</p>
 </div>
 
-<!-- BOTÓN FLOTANTE BOOK -->
-<a href="booking.html" class="float-wa" aria-label="Book your tour">
-  <div class="float-pulse"></div>
-  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-</a>
 
 <!-- MENÚ MÓVIL -->
 <div class="mob-nav" id="mobNav">
@@ -476,7 +471,6 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-inner">
     <div>
-      <p class="hero-kicker">Walking Tour · Alicante, Spain</p>
       <h1 class="hero-h1">
         <span class="ln"><span>We Are</span></span>
         <span class="ln"><span><em>Alicante</em></span></span>
@@ -487,6 +481,7 @@
         Book Tour
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       </a>
+      <p class="hero-loc">Alicante, España &middot; 38°20'N, 0°29'W</p>
     </div>
   </div>
 </section>
@@ -1036,6 +1031,7 @@
     drag.significant = false;
     var stage = document.getElementById('tmStage');
     if (stage) stage.classList.add('dragging');
+    cards.forEach(function(el) { el.style.transition = 'none'; });
   }
 
   function dragMove(clientX) {
@@ -1051,6 +1047,7 @@
     drag.active = false;
     var stage = document.getElementById('tmStage');
     if (stage) stage.classList.remove('dragging');
+    cards.forEach(function(el) { el.style.transition = ''; });
     var dx = drag.curX - drag.startX;
     if (Math.abs(dx) >= SNAP) {
       move(dx < 0 ? 1 : -1);
