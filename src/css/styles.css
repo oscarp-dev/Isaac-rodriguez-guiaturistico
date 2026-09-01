@@ -1059,7 +1059,7 @@ footer {
   padding-top: .9rem;
   display: flex; justify-content: space-between; align-items: center;
 }
-.footer-copy { font-size: .63rem; color: rgba(58, 32, 22, .45); }
+.footer-copy { font-size: .63rem; color: rgba(58, 32, 22, .68); }
 
 /* ─── OPTIMIZACIÓN DE RENDIMIENTO ─── */
 /* Las secciones fuera de pantalla no se renderizan hasta que entran en viewport */
