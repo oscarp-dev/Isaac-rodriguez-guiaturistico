@@ -74,22 +74,25 @@ function closeMob() {
 }
 
 /* ─── PARALLAX ─── */
-window.addEventListener('scroll', () => {
+const heroBg = document.getElementById('heroBg');
+const ctaBg  = document.getElementById('ctaBg');
+let parallaxTicking = false;
+
+function updateParallax() {
+  parallaxTicking = false;
   const y = window.scrollY;
+  // Read layout first, then write styles, to avoid forced reflow.
+  const ctaTop = ctaBg ? ctaBg.parentElement.getBoundingClientRect().top : null;
 
-  // Hero background
-  const heroBg = document.getElementById('heroBg');
-  if (heroBg) {
-    heroBg.style.transform = `scale(1.08) translateY(${y * 0.28}px)`;
-  }
+  if (heroBg) heroBg.style.transform = `scale(1.08) translateY(${y * 0.28}px)`;
+  if (ctaBg && ctaTop !== null) ctaBg.style.transform = `scale(1.06) translateY(${-ctaTop * 0.14}px)`;
+}
 
-  // CTA final background
-  const ctaBg = document.getElementById('ctaBg');
-  if (ctaBg) {
-    const r = ctaBg.parentElement.getBoundingClientRect();
-    ctaBg.style.transform = `scale(1.06) translateY(${-r.top * 0.14}px)`;
-  }
-});
+window.addEventListener('scroll', () => {
+  if (parallaxTicking) return;
+  parallaxTicking = true;
+  requestAnimationFrame(updateParallax);
+}, { passive: true });
 
 /* ─── SCROLL REVEAL ─── */
 const revealObserver = new IntersectionObserver(

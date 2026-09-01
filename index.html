@@ -178,12 +178,13 @@
   <!-- ═══ FUENTES ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"></noscript>
 
   <!-- ═══ PRELOAD IMÁGENES CRÍTICAS ═══ -->
   <link rel="preload" as="image" href="assets/images/img_castillo_sunset.webp"
-        media="(min-width: 769px)"
-        imagesrcset="assets/images/img_castillo_sunset.webp 1x, assets/images/img_castillo_sunset@2x.webp 2x">
+        media="(min-width: 769px)">
   <link rel="preload" as="image" href="assets/images/img_castillo_sunset-sm.webp"
         media="(max-width: 768px)">
 
@@ -659,6 +660,8 @@
       <div class="about-photo-wrap">
         <img
           src="assets/images/isaac.webp"
+          srcset="assets/images/isaac-sm.webp 600w, assets/images/isaac.webp 900w"
+          sizes="(max-width: 768px) 220px, (max-width: 1024px) 280px, 400px"
           alt="Isaac Rodriguez — Tour Guide Alicante"
           class="about-photo"
           loading="lazy" decoding="async"
@@ -689,7 +692,10 @@
   </div>
   <div class="mosaic">
     <div class="m-item reveal">
-      <img src="assets/images/img_playa_castillo.webp" alt="Postiguet Beach with Santa Barbara Castle" loading="lazy" decoding="async">
+      <img src="assets/images/img_playa_castillo.webp"
+     srcset="assets/images/img_playa_castillo-sm.webp 900w, assets/images/img_playa_castillo.webp 1920w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Postiguet Beach with Santa Barbara Castle" loading="lazy" decoding="async">
       <div class="m-label"><strong>Postiguet Beach</strong><span>Golden sands beneath the castle</span></div>
     </div>
     <div class="m-item reveal r1">
@@ -700,7 +706,10 @@
       <div class="m-label"><strong>Explanada</strong><span>The city's most iconic promenade</span></div>
     </div>
     <div class="m-item reveal r2">
-      <img src="assets/images/img_ciudad_atardecer.webp" alt="Alicante at sunset from the castle" loading="lazy" decoding="async">
+      <img src="assets/images/img_ciudad_atardecer.webp"
+     srcset="assets/images/img_ciudad_atardecer-sm.webp 900w, assets/images/img_ciudad_atardecer.webp 1920w"
+     sizes="(max-width: 768px) 100vw, 30vw"
+     alt="Alicante at sunset from the castle" loading="lazy" decoding="async">
       <div class="m-label"><strong>Alicante at Sunset</strong><span>When the city turns to gold</span></div>
     </div>
     <div class="m-item reveal r1">
