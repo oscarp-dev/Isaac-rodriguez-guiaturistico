@@ -7,7 +7,7 @@
 function hidePreloader() {
   setTimeout(() => {
     document.getElementById('preloader').classList.add('gone');
-  }, 700);
+  }, 350);
 }
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', hidePreloader);
