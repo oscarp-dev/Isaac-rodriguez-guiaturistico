@@ -90,7 +90,7 @@ body {
   z-index: 10000;
   display: flex; align-items: center; justify-content: center;
   flex-direction: column; gap: 2rem;
-  transition: opacity .9s ease, visibility .9s ease;
+  transition: opacity .5s ease, visibility .5s ease;
 }
 .preloader.gone { opacity: 0; visibility: hidden; pointer-events: none; }
 .pl-word {
@@ -269,8 +269,8 @@ nav.scrolled .nav-cta:hover { background: var(--ember) !important; }
   display: block; opacity: 0; transform: translateY(110%);
   animation: riseUp .95s cubic-bezier(.22, 1, .36, 1) forwards;
 }
-.hero-h1 .ln:nth-child(1) span { animation-delay: 1.8s; font-weight: 400; color: rgba(240,224,208,.82); }
-.hero-h1 .ln:nth-child(2) span { animation-delay: 2.0s; }
+.hero-h1 .ln:nth-child(1) span { animation-delay: .3s; font-weight: 400; color: rgba(240,224,208,.82); }
+.hero-h1 .ln:nth-child(2) span { animation-delay: .5s; }
 .hero-h1 em {
   font-style: normal;
   display: block;

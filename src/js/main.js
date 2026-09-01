@@ -4,11 +4,16 @@
 ════════════════════════════════════════ */
 
 /* ─── PRELOADER ─── */
-window.addEventListener('load', () => {
+function hidePreloader() {
   setTimeout(() => {
     document.getElementById('preloader').classList.add('gone');
-  }, 2400);
-});
+  }, 700);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', hidePreloader);
+} else {
+  hidePreloader();
+}
 
 /* ─── CURSOR PERSONALIZADO ─── */
 const cur  = document.getElementById('cursor');

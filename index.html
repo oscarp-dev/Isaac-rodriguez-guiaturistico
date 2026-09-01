@@ -452,7 +452,7 @@
 <!-- NAVEGACIÓN -->
 <nav id="mainNav">
   <a href="#" class="nav-logo">
-    <img src="assets/images/logo.svg" alt="We Are Alicante" class="nav-logo-img">
+    <img src="assets/images/logo.svg" alt="We Are Alicante" class="nav-logo-img" fetchpriority="high">
   </a>
   <ul class="nav-links">
     <li><a href="#tours">The Tour</a></li>
@@ -918,6 +918,7 @@
   var busy = false;
   var cards = [];
   var drag = { active: false, startX: 0, curX: 0, significant: false };
+  var mqDesktop = window.matchMedia('(min-width: 640px)');
 
   function mod(n, m) { return ((n % m) + m) % m; }
   function posFor(i)  { return i - CENTER; }
@@ -981,7 +982,7 @@
   }
 
   function applyDragTransforms(dx) {
-    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+    var cw = mqDesktop.matches ? CARD_LG : CARD_SM;
     cards.forEach(function (el, i) {
       el.style.transform = buildTransform(posFor(i), dx, cw, dx);
     });
@@ -993,7 +994,7 @@
 
     var stage = document.getElementById('tmStage');
     if (!stage) { busy = false; return; }
-    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+    var cw = mqDesktop.matches ? CARD_LG : CARD_SM;
 
     if (steps > 0) {
       var recycled = cards.shift();
@@ -1071,7 +1072,7 @@
   function init() {
     var stage = document.getElementById('tmStage');
     if (!stage) return;
-    var cw = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+    var cw = mqDesktop.matches ? CARD_LG : CARD_SM;
 
     for (var i = 0; i < N; i++) {
       var pos = posFor(i);
@@ -1109,7 +1110,7 @@
     stage.addEventListener('touchend',   function ()  { if (drag.active) dragEnd(); });
 
     window.addEventListener('resize', function () {
-      var cw2 = window.innerWidth >= 640 ? CARD_LG : CARD_SM;
+      var cw2 = mqDesktop.matches ? CARD_LG : CARD_SM;
       cards.forEach(function (el, i) {
         el.style.transition = 'none';
         el.style.width  = cw2 + 'px';
